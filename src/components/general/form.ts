@@ -50,7 +50,7 @@ export class Form<T> extends Component<IFormInfo> {
 
     //Установка состояния кнопки
     set valid(value: boolean) {
-        this._submitButton.disabled = !value;
+        this.setDisabled(this._submitButton,!value);
     }
 
     //Установка сообщения об ошибке

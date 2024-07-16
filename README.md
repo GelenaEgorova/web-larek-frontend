@@ -280,12 +280,14 @@ class AppInfo {
 - `constructor(container: HTMLElement, events: IEvents)` -  наследуется от абстрактного класса Component
 
 Поля класса:
-- `container: HTMLElement` - элемент модального окна
+- `container: HTMLElement` - переключает модального окна
 - `events: IEvents` - брокер событий
 - `content: HTMLElement` - контент, находящийся в модальном окне
 - `closeButton: HTMLButtonElement`- кнопка закрытия модального окна
 
 Методы класса: 
+- `toggleModal()` - присваивает контен модальному окну
+- `set content()` - присваивает контен модальному окну
 - `set content()` - присваивает контен модальному окну
 - `open()` - управляет отображением модального окна - показывает на странице
 - `close()` - управляет отображением модального окна - скрывает со страницы

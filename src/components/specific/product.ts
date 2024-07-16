@@ -45,7 +45,7 @@ export class Product extends Component<IProduct> {
     }
 
     set description(value: string) {
-		this._description.textContent = value;
+		this.setText(this._description, value);
 	}
 
     set image(value: string) {
@@ -62,18 +62,18 @@ export class Product extends Component<IProduct> {
 
     set category(value: string) {
         const allCategories: Record<string, string> = {
-              'софт-скил': 'soft',
-              'хард-скил': 'hard',
-              'другое': 'other',
-              'кнопка': 'button',
-              'дополнительное': 'additional'
+            'софт-скил': 'soft',
+            'хард-скил': 'hard',
+            'другое': 'other',
+            'кнопка': 'button',
+            'дополнительное': 'additional'
         };
 
         Object.values(allCategories).forEach((category)=> {
             this.toggleClass(this._category, `card__category_${allCategories[value]}`,false);
         })
         this.toggleClass(this._category, `card__category_${allCategories[value]}`,true);
-		this._category.textContent = value;
+		this.setText(this._category, value);
 	}
 
 	set price(value: number | null) {
@@ -82,16 +82,15 @@ export class Product extends Component<IProduct> {
             this.setText(this._button,"Нельзя купить");
             this.setText(this._price, "Бесценно");
         } else {
-            this.setText(this._button,`В корзину`);
             this.setText(this._price, `${value} синапсов`)
         }
 	}
 
     set inBasket(isInBasket: boolean) {
-		this._button.textContent = isInBasket ? 'Убрать' : 'В корзину';
+		this.setText(this._button, isInBasket ? 'Убрать' : 'В корзину');
 	}
 
 	set index(value: number) {
-		this._index.textContent = String(value);
+		this.setText(this._index, value);
 	}
 }

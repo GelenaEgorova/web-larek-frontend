@@ -2,15 +2,15 @@ import './scss/styles.scss';
 import { API_URL, CDN_URL } from './utils/constants';
 import { cloneTemplate, ensureElement } from './utils/utils';
 import { EventEmitter } from './components/base/events';
-import { AppState } from './components/specific/appdata';
+import { AppState } from './components/specific/appData';
 import { Basket } from './components/specific/basket';
-import { Contacts } from './components/specific/formwithcontact';
+import { ContactsForm } from './components/specific/formWithContact';
 import { Modal } from './components/general/modal';
-import { Order } from './components/specific/formwithadress';
+import { OrderForm } from './components/specific/formWithAdress';
 import { Page } from './components/specific/page';
 import { Product } from './components/specific/product';
-import { SiteApi } from './components/specific/siteapi';
-import { SuccessfulForm } from './components/specific/successfulform';
+import { SiteApi } from './components/specific/siteApi';
+import { SuccessfulForm } from './components/specific/successfulForm';
 import {IProduct, IShoppingInfo, IFormError, ISuccessfulOrder} from './types';
 
 const api = new SiteApi(CDN_URL, API_URL);
@@ -33,8 +33,8 @@ const modal = new Modal(ensureElement<HTMLElement>('#modal-container'), events);
 
 // Переиспользуемые части интерфейса
 const basket = new Basket(cloneTemplate(basketTemplate), events);
-const contacts = new Contacts(cloneTemplate(contactsTemplate), events);
-const order = new Order(cloneTemplate(orderTemplate), events);
+const contacts = new ContactsForm(cloneTemplate(contactsTemplate), events);
+const order = new OrderForm(cloneTemplate(orderTemplate), events);
 const success = new SuccessfulForm(cloneTemplate(successTemplate), events);
 
 // Получаем товары с сервера
@@ -162,11 +162,10 @@ events.on('contacts:submit', () => {
 			order.resetForm();
 			contacts.resetForm();
 			events.emit('order:complete',result)
-			page.counter = 0;
+			appState.cleanBasket();
+			page.counter = appState.getNumberBasket();
 		})
-		.catch((err) => {
-			console.error(err);
-		})
+		.catch(console.error);
 })
 
 // Отправить форму с контактными данными

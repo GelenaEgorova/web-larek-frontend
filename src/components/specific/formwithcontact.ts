@@ -2,7 +2,7 @@ import { Form } from '../general/form';
 import { IBuyerInfo } from '../../types';
 import { IEvents } from '../base/events';
 
-export class Contacts extends Form<IBuyerInfo> {
+export class ContactsForm extends Form<IBuyerInfo> {
     protected _email: HTMLInputElement;
     protected _phone: HTMLInputElement;
 
